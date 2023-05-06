@@ -5,6 +5,12 @@ const emptyList = document.querySelector('#emptyList');
 
 form.addEventListener('submit', addTask);
 
+tasksList.addEventListener('click', deleteTask);
+
+//Задача завершена
+tasksList.addEventListener('click', doneTask);
+
+
 function addTask(event) {
   // за допомогою цього, можемо для кнопки "Додати" відіграти якусь дію
   event.preventDefault();
@@ -26,7 +32,7 @@ function addTask(event) {
             </div>
           </li>`;
 
-  tasksList.insertAdjacentHTML('beforeend', taskHTML);
+  tasksList.insertAdjacentHTML('afterbegin', taskHTML);
 
   // Очищуємо поле для вводу та повертаємо на нього фокус.
 
@@ -39,4 +45,17 @@ function addTask(event) {
     emptyList.classList.add('none'); // назначаємо display:none для "Список справ порожній"
     // Повертаємо HTML колекцію із тегів li
   }
+}
+
+function deleteTask(event) {
+  if (event.target.dataset.action === 'delete') {
+    const parentNode = event.target.closest('.list-group-item');
+    parentNode.remove();
+  }
+}
+
+function doneTask(event) {
+  if (event.target.dataset.action === 'done') {
+    console.log('done')
+  }  
 }
