@@ -1,8 +1,11 @@
 const form = document.querySelector('#form'); // знаходимо форму
 const taskInput = document.querySelector('#taskInput'); // знаходимо Task Input
 const tasksList = document.querySelector('#tasksList');
+const emptyList = document.querySelector('#emptyList');
 
-form.addEventListener('submit', function (event) {
+form.addEventListener('submit', addTask);
+
+function addTask(event) {
   // за допомогою цього, можемо для кнопки "Додати" відіграти якусь дію
   event.preventDefault();
 
@@ -24,4 +27,16 @@ form.addEventListener('submit', function (event) {
           </li>`;
 
   tasksList.insertAdjacentHTML('beforeend', taskHTML);
-});
+
+  // Очищуємо поле для вводу та повертаємо на нього фокус.
+
+  taskInput.value = '';
+  taskInput.focus();
+
+  // Перевіряємо чи є інші задачі в списку
+
+  if (tasksList.children.length > 1) {
+    emptyList.classList.add('none'); // назначаємо display:none для "Список справ порожній"
+    // Повертаємо HTML колекцію із тегів li
+  }
+}
