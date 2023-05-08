@@ -10,7 +10,6 @@ tasksList.addEventListener('click', deleteTask);
 //Задача завершена
 tasksList.addEventListener('click', doneTask);
 
-
 function addTask(event) {
   // за допомогою цього, можемо для кнопки "Додати" відіграти якусь дію
   event.preventDefault();
@@ -56,6 +55,9 @@ function deleteTask(event) {
 
 function doneTask(event) {
   if (event.target.dataset.action === 'done') {
-    console.log('done')
-  }  
+    const parentNode = event.target.closest('.list-group-item');
+    const taskTitle = parentNode.querySelector('.task-title');
+    taskTitle.classList.toggle('task-title--done');
+    console.log(taskTitle);
+  }
 }
