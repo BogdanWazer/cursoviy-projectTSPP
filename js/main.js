@@ -37,6 +37,15 @@ function addTask(event) {
 
   taskInput.value = '';
   taskInput.focus();
+}
+// Функціонал кнопки "Видалити"
+
+function deleteTask(event) {
+  // Якщо кнопка не натиснута = виходимо із функції
+  if (event.target.dataset.action !== 'delete') return;
+
+  const parentNode = event.target.closest('.list-group-item');
+  parentNode.remove();
 
   // Перевіряємо чи є інші задачі в списку
 
@@ -46,18 +55,14 @@ function addTask(event) {
   }
 }
 
-function deleteTask(event) {
-  if (event.target.dataset.action === 'delete') {
-    const parentNode = event.target.closest('.list-group-item');
-    parentNode.remove();
-  }
-}
-
+// Функціонал кнопки "Готово"
 function doneTask(event) {
-  if (event.target.dataset.action === 'done') {
-    const parentNode = event.target.closest('.list-group-item');
-    const taskTitle = parentNode.querySelector('.task-title');
-    taskTitle.classList.toggle('task-title--done');
-    console.log(taskTitle);
-  }
+  
+  // Якщо кнопка не натиснута = виходимо із функції
+  if (event.target.dataset.action !== 'done') return;
+
+  const parentNode = event.target.closest('.list-group-item');
+  const taskTitle = parentNode.querySelector('.task-title');
+  taskTitle.classList.toggle('task-title--done');
+  console.log(taskTitle);
 }
